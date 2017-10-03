@@ -5,15 +5,6 @@ const SIDES_DEFAULT = 5;
 $sides = get_sides($argv);
 list($field, $field_turned) = make_field($sides);
 
-// フィールド作成
-for ($i = 0; $i < $sides; $i++) {
-    for ($j = 0; $j < $sides; $j++) {
-        $paint = empty(rand(0, 1));
-        $field[$i][$j] = $paint;
-        $field_turned[$j][$i] = $paint;
-    }
-}
-
 // フィールドを出力
 foreach ($field as $line) {
     foreach ($line as $paint) {
