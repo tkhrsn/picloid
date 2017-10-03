@@ -3,20 +3,19 @@
 const SIDES_DEFAULT = 5;
 
 $sides = get_sides($argv);
-$fields = array();
-$fields_turned = array();
+list($field, $field_turned) = make_field($sides);
 
 // フィールド作成
 for ($i = 0; $i < $sides; $i++) {
     for ($j = 0; $j < $sides; $j++) {
         $paint = empty(rand(0, 1));
-        $fields[$i][$j] = $paint;
-        $fields_turned[$j][$i] = $paint;
+        $field[$i][$j] = $paint;
+        $field_turned[$j][$i] = $paint;
     }
 }
 
 // フィールドを出力
-foreach ($fields as $line) {
+foreach ($field as $line) {
     foreach ($line as $paint) {
         echo $paint ? '■' : '□';
     }
@@ -24,7 +23,7 @@ foreach ($fields as $line) {
 }
 
 // 横の数字を取得
-foreach ($fields as $line) {
+foreach ($field as $line) {
     $line_cnts = array();
     $line_cnts[0] = 0;
     foreach ($line as $i => $paint) {
@@ -43,7 +42,7 @@ foreach ($fields as $line) {
 echo "\n";
 
 // 縦の数字を取得
-foreach ($fields_turned as $line) {
+foreach ($field_turned as $line) {
     $line_cnts = array();
     $line_cnts[0] = 0;
     foreach ($line as $i => $paint) {
