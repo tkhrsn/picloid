@@ -1,5 +1,8 @@
 <?php
-$sides = 25;
+
+const SIDES_DEFAULT = 5;
+
+$sides = get_sides($argv);
 $fields = array();
 $fields_turned = array();
 
@@ -54,4 +57,49 @@ foreach ($fields_turned as $line) {
     }
     echo implode(' ', array_filter($line_cnts));
     echo "\n";
+}
+
+// methods
+// ---------------------------------------------------------------
+
+/**
+ * 幅を取得
+ * @param type $argv
+ * @return type
+ */
+function get_sides($argv) {
+    $arg_sides = $argv[1];
+    // 空チェック
+    if (empty($arg_sides)) {
+        return SIDES_DEFAULT;
+    }
+
+    // 数値チェック
+    if (!ctype_digit($arg_sides)) {
+        return SIDES_DEFAULT;
+    }
+
+    // 境界値チェック
+    if (100 < $arg_sides) {
+        return SIDES_DEFAULT;
+    }
+
+    return (int)$arg_sides;
+}
+
+/**
+ * フィールド作成
+ */
+function make_field($sides) {
+    $field = array();
+    $field_turned = array();
+    for ($i = 0; $i < $sides; $i++) {
+        for ($j = 0; $j < $sides; $j++) {
+            $paint = empty(rand(0, 1));
+            $field[$i][$j] = $paint;
+            $field_turned[$j][$i] = $paint;
+        }
+    }
+
+    return array($field, $field_turned);
 }
