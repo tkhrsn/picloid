@@ -31,19 +31,13 @@ $col_cnts = get_line_cnts($field_turned);
 function get_sides($argv) {
     $arg_sides = $argv[1];
     // 空チェック
-    if (empty($arg_sides)) {
-        return SIDES_DEFAULT;
-    }
+    if (empty($arg_sides)) return SIDES_DEFAULT;
 
     // 数値チェック
-    if (!ctype_digit($arg_sides)) {
-        return SIDES_DEFAULT;
-    }
+    if (!ctype_digit($arg_sides)) return SIDES_DEFAULT;
 
     // 境界値チェック
-    if (100 < $arg_sides) {
-        return SIDES_DEFAULT;
-    }
+    if (100 < $arg_sides) return SIDES_DEFAULT;
 
     return (int)$arg_sides;
 }
