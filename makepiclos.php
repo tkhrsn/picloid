@@ -44,6 +44,8 @@ function get_sides($argv) {
 
 /**
  * フィールド作成
+ * @param type $sides
+ * @return type
  */
 function make_field($sides) {
     $field = array();
@@ -59,6 +61,11 @@ function make_field($sides) {
     return array($field, $field_turned);
 }
 
+/**
+ * 縦横の数字カウントを取得
+ * @param type $field
+ * @return type
+ */
 function get_line_cnts($field) {
     $lines = array();
     foreach ($field as $line) {
