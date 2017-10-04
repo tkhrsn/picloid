@@ -14,40 +14,11 @@ foreach ($field as $line) {
 }
 
 // 横の数字を取得
-foreach ($field as $line) {
-    $line_cnts = array();
-    $line_cnts[0] = 0;
-    foreach ($line as $i => $paint) {
-        if ($paint) {
-            $line_cnts[count($line_cnts)-1]++;
-        } else {
-            if (!empty(end($line_cnts))) {
-                $line_cnts[count($line_cnts)] = 0;
-            }
-        }
-    }
-    echo implode(' ', array_filter($line_cnts));
-    echo "\n";
-}
-
-echo "\n";
+$line_cnts = get_line_cnts($field);
 
 // 縦の数字を取得
-foreach ($field_turned as $line) {
-    $line_cnts = array();
-    $line_cnts[0] = 0;
-    foreach ($line as $i => $paint) {
-        if ($paint) {
-            $line_cnts[count($line_cnts)-1]++;
-        } else {
-            if (!empty(end($line_cnts))) {
-                $line_cnts[count($line_cnts)] = 0;
-            }
-        }
-    }
-    echo implode(' ', array_filter($line_cnts));
-    echo "\n";
-}
+$col_cnts = get_line_cnts($field_turned);
+
 
 // methods
 // ---------------------------------------------------------------
@@ -93,3 +64,25 @@ function make_field($sides) {
 
     return array($field, $field_turned);
 }
+
+function get_line_cnts($field) {
+    $lines = array();
+    foreach ($field as $line) {
+        $line_cnts = array();
+        $line_cnts[0] = 0;
+        foreach ($line as $i => $paint) {
+            if ($paint) {
+                $line_cnts[count($line_cnts)-1]++;
+            } else {
+                if (!empty(end($line_cnts))) {
+                    $line_cnts[count($line_cnts)] = 0;
+                }
+            }
+        }
+        $lines[] = array_filter($line_cnts);
+    }
+
+    return $lines;
+}
+
+// 横の数字を取得
